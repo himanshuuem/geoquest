@@ -2,6 +2,8 @@
 
 > A capitals and flags quiz backed by **PostgreSQL**. Keep a streak alive, then post your score to the leaderboard. Game state is **HMAC-signed**, so the server stays stateless and streaks can't be faked.
 
+**🔗 Live demo:** https://geoquest-z4hm.onrender.com/ *(free tier: the first visit after idle takes ~30–60s to wake up)*
+
 [![test](https://github.com/himanshuuem/geoquest/actions/workflows/test.yml/badge.svg)](https://github.com/himanshuuem/geoquest/actions/workflows/test.yml)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-5-000?logo=express)
