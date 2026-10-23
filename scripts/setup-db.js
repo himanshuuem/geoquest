@@ -1,8 +1,9 @@
 import { readFile } from "node:fs/promises";
-import { createPool } from "../src/db.js";
+import { createPool, ensureSchema } from "../src/db.js";
 
 const pool = createPool();
 try {
+  await ensureSchema(pool);
   for (const file of ["schema.sql", "seed.sql"]) {
     await pool.query(await readFile(new URL(`../db/${file}`, import.meta.url), "utf8"));
     console.log(`✔ ran db/${file}`);
