@@ -1,0 +1,25 @@
+<%- include("partials/head", { title: mode === "flags" ? "Flags" : "Capitals" }) %>
+<div class="hud">
+  <span class="pill"><%= mode === "flags" ? "🏳️ Flags" : "🏛️ Capitals" %></span>
+  <span class="streak">🔥 <strong><%= streak %></strong> in a row</span>
+</div>
+<% if (feedback) { %><p class="feedback ok" role="status"><%= feedback.text %></p><% } %>
+<section class="card question">
+  <% if (mode === "flags") { %>
+    <p class="prompt">Which country flies this flag?</p>
+    <p class="flag" role="img" aria-label="A national flag"><%= flagEmoji(question.answer.code) %></p>
+  <% } else { %>
+    <p class="prompt">What is the capital of</p>
+    <h1 class="country"><%= question.answer.name %>?</h1>
+  <% } %>
+  <form method="post" action="/answer" class="options">
+    <input type="hidden" name="token" value="<%= token %>">
+    <% question.options.forEach((option, i) => { %>
+      <button type="submit" name="choice" value="<%= option.id %>" class="option" accesskey="<%= i + 1 %>">
+        <kbd><%= i + 1 %></kbd> <%= mode === "flags" ? option.name : option.capital %>
+      </button>
+    <% }) %>
+  </form>
+</section>
+<script src="/keys.js" defer></script>
+<%- include("partials/foot") %>

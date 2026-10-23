@@ -1,0 +1,17 @@
+<%- include("partials/head", { title: "Leaderboard" }) %>
+<section class="card">
+  <h1><%= mode === "flags" ? "🏳️ Flags" : "🏛️ Capitals" %> leaderboard</h1>
+  <p class="tabs"><a href="/leaderboard/capitals" class="<%= mode === 'capitals' ? 'on' : '' %>">Capitals</a> · <a href="/leaderboard/flags" class="<%= mode === 'flags' ? 'on' : '' %>">Flags</a></p>
+  <% if (!rows.length) { %><p class="muted">No scores yet.</p><% } else { %>
+    <table>
+      <thead><tr><th scope="col">#</th><th scope="col">Player</th><th scope="col">Streak</th><th scope="col">Date</th></tr></thead>
+      <tbody>
+        <% rows.forEach((r, i) => { %>
+          <tr><td><%= i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1 %></td><td><%= r.nickname %></td><td><strong><%= r.streak %></strong></td><td><%= new Date(r.created_at).toLocaleDateString("en-IN") %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+  <p class="actions"><a class="btn" href="/play/<%= mode %>">Play <%= mode %></a></p>
+</section>
+<%- include("partials/foot") %>

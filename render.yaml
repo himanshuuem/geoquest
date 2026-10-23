@@ -1,0 +1,19 @@
+databases:
+  - name: geoquest-db
+    plan: free
+    databaseName: geoquest
+services:
+  - type: web
+    name: geoquest
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run db:setup
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: geoquest-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true

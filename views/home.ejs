@@ -1,0 +1,22 @@
+<%- include("partials/head", { title: "Home" }) %>
+<section class="hero">
+  <h1>How well do you <em>know</em> the world?</h1>
+  <p>Answer in a row. One wrong answer ends your streak. Make the leaderboard.</p>
+  <div class="modes">
+    <a class="mode" href="/play/capitals"><span class="big">🏛️</span><strong>Capitals</strong><small>Name the capital city</small></a>
+    <a class="mode" href="/play/flags"><span class="big">🏳️</span><strong>Flags</strong><small>Whose flag is this?</small></a>
+  </div>
+</section>
+<section class="boards">
+  <% Object.entries(boards).forEach(([mode, rows]) => { %>
+    <div class="board">
+      <h2><%= mode === "capitals" ? "🏛️ Capitals" : "🏳️ Flags" %> · top 5</h2>
+      <% if (!rows.length) { %><p class="muted">No scores yet. Be the first!</p><% } %>
+      <ol>
+        <% rows.forEach((r) => { %><li><span><%= r.nickname %></span><strong><%= r.streak %></strong></li><% }) %>
+      </ol>
+      <a href="/leaderboard/<%= mode %>">Full leaderboard →</a>
+    </div>
+  <% }) %>
+</section>
+<%- include("partials/foot") %>
